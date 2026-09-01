@@ -3,18 +3,18 @@
    ========================================================================== */
 
 :root {
-    /* Color Palette */
-    --color-bg-start: #FDFBF7;
+    /* Color Palette derived from Watercolor Floral image */
+    --color-bg-start: #FDFBF8;
     --color-bg-end: #F7EFE9;
-    --color-card-bg: rgba(255, 255, 255, 0.92);
-    --color-primary: #8A5A65;
-    --color-primary-hover: #724650;
-    --color-sage: #5B7A6A;
-    --color-sage-light: #EBF2ED;
-    --color-gold: #C5A059;
-    --color-gold-light: #F4EAD3;
-    --color-text-main: #2C3531;
-    --color-text-muted: #6B7C75;
+    --color-card-bg: rgba(255, 255, 255, 0.94);
+    --color-primary: #B56576;
+    --color-primary-hover: #9C4D5D;
+    --color-sage: #2A5B5A;
+    --color-sage-light: #EEF5F4;
+    --color-gold: #C88A6E;
+    --color-gold-light: #F8EFEA;
+    --color-text-main: #1C2D2B;
+    --color-text-muted: #526B68;
     --color-error: #D9534F;
 
     /* Fonts */
@@ -23,9 +23,9 @@
     --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
 
     /* Shadows & Effects */
-    --shadow-soft: 0 15px 35px rgba(138, 90, 101, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
-    --shadow-card: 0 20px 40px rgba(74, 53, 58, 0.12), 0 2px 6px rgba(0,0,0,0.04);
-    --border-gold: 1px solid rgba(197, 160, 89, 0.35);
+    --shadow-soft: 0 15px 35px rgba(181, 101, 118, 0.1), 0 5px 15px rgba(0, 0, 0, 0.04);
+    --shadow-card: 0 20px 40px rgba(42, 91, 90, 0.12), 0 2px 8px rgba(0,0,0,0.04);
+    --border-gold: 1px solid rgba(200, 138, 110, 0.35);
     --radius-lg: 24px;
     --radius-md: 14px;
     --radius-sm: 8px;
@@ -75,17 +75,15 @@ body {
 
 @keyframes floatPetal {
     0% {
-        transform: translateY(-50px) rotate(0deg) scale(0.8);
-        opacity: 0;
+        transform: translateY(-10vh) translateX(0) rotate(0deg) scale(0.8);
+        opacity: 0.85;
     }
-    10% {
-        opacity: 0.8;
-    }
-    90% {
-        opacity: 0.8;
+    50% {
+        transform: translateY(48vh) translateX(25px) rotate(360deg) scale(1.05);
+        opacity: 0.85;
     }
     100% {
-        transform: translateY(105vh) rotate(720deg) scale(1.2);
+        transform: translateY(105vh) translateX(-15px) rotate(720deg) scale(1.2);
         opacity: 0;
     }
 }
@@ -144,25 +142,29 @@ body {
 /* Card Elements */
 .card-header-image {
     width: 100%;
-    max-height: 180px;
+    height: 210px;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(253, 248, 245, 0.6);
-    border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+    background: linear-gradient(180deg, rgba(253, 251, 248, 0.9) 0%, rgba(247, 239, 233, 0.4) 100%);
+    border-bottom: 1px solid rgba(200, 138, 110, 0.2);
+    position: relative;
+    padding: 12px 10px 5px;
 }
 
 .floral-img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
     opacity: 0.95;
-    transition: transform 10s ease;
+    filter: drop-shadow(0 4px 12px rgba(181, 101, 118, 0.18));
+    transition: transform 6s ease;
 }
 
 .card-container:hover .floral-img {
-    transform: scale(1.03);
+    transform: scale(1.04);
 }
 
 .card-body {
