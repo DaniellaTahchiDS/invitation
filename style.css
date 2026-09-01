@@ -518,6 +518,42 @@ body {
     letter-spacing: 0.5px;
 }
 
+/* Venue Map Links */
+.detail-card-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.detail-card-link:hover {
+    border-color: var(--color-primary);
+    background: #FFFDFB;
+}
+
+.venue-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: var(--transition-smooth);
+}
+
+.ext-icon {
+    font-size: 0.72rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.location-link {
+    color: var(--color-primary);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.location-link:hover {
+    color: var(--color-primary-hover);
+}
+
 /* Responsive Adjustments */
 @media (max-width: 480px) {
     .card-body {

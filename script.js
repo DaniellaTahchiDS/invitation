@@ -118,8 +118,8 @@ function renderConfirmation(status) {
         message.innerHTML = `Dearest <strong>${escapeHtml(state.guestName)}</strong>, thank you for accepting! We are thrilled to celebrate Angela-Maria Farhat's special occasion with you.`;
         eventInfo.innerHTML = `
             <p class="conf-highlight">✨ We can't wait to see you!</p>
-            <p class="conf-sub">Date: Saturday, Oct 24, 2026 | 6:30 PM</p>
-            <p class="conf-sub">Venue: The Grand Botanical Garden</p>
+            <p class="conf-sub">Date: Saturday, Sep 12, 2026 | 8:00 PM</p>
+            <p class="conf-sub">Venue: <a href="https://maps.app.goo.gl/vDAxCuTVHn1hJBo96" target="_blank" rel="noopener noreferrer" class="location-link">Farhat's Villa, Delbta 📍</a></p>
         `;
     } else {
         badge.textContent = '🌸';
