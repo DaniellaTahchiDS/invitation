@@ -95,9 +95,10 @@ function doPost(e) {
     var timestamp = data.timestamp || new Date().toLocaleString();
     var name = data.name || "Unknown Guest";
     var status = data.status || "No Response";
+    var wish = data.wish || "";
 
-    // Append row: [Timestamp, Guest Name, RSVP Status]
-    sheet.appendRow([timestamp, name, status]);
+    // Append row: [Timestamp, Guest Name, RSVP Status, Secret Birthday Wish]
+    sheet.appendRow([timestamp, name, status, wish]);
 
     return ContentService.createTextOutput(JSON.stringify({ "result": "success" }))
                          .setMimeType(ContentService.MimeType.JSON);
