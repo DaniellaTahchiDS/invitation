@@ -177,20 +177,29 @@ function initPetals() {
     const container = document.getElementById('petalsContainer');
     if (!container) return;
 
-    const numberOfPetals = 15;
+    const petalGradients = [
+        'radial-gradient(circle, rgba(229, 152, 155, 0.75) 0%, rgba(181, 101, 118, 0.3) 100%)',
+        'radial-gradient(circle, rgba(200, 138, 110, 0.7) 0%, rgba(139, 94, 67, 0.25) 100%)',
+        'radial-gradient(circle, rgba(42, 91, 90, 0.5) 0%, rgba(82, 121, 111, 0.2) 100%)'
+    ];
+
+    const numberOfPetals = 22;
     for (let i = 0; i < numberOfPetals; i++) {
         const petal = document.createElement('div');
         petal.className = 'petal';
 
-        // Randomize sizing, position, and animation timing
+        // Sizing, position, and animation timing
         const size = Math.random() * 14 + 10;
         const left = Math.random() * 100;
-        const delay = Math.random() * 10;
-        const duration = Math.random() * 8 + 8;
+        const duration = Math.random() * 8 + 7; // 7s to 15s
+        // Negative delay ensures petals are ALREADY falling immediately on page load
+        const delay = -Math.random() * duration;
+        const bgGradient = petalGradients[i % petalGradients.length];
 
         petal.style.width = `${size}px`;
         petal.style.height = `${size * 1.4}px`;
         petal.style.left = `${left}%`;
+        petal.style.background = bgGradient;
         petal.style.animationDelay = `${delay}s`;
         petal.style.animationDuration = `${duration}s`;
 

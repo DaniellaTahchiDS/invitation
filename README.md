@@ -36,6 +36,30 @@ Invitation/
 
 ---
 
+## 💻 How to Test Changes Locally Before Pushing
+
+Here are 3 fast ways to preview and test your website on your computer before pushing to GitHub:
+
+### Option 1: Direct File Opening (Easiest)
+1. Open File Explorer and navigate to your `Invitation` folder.
+2. Double-click **`index.html`** (or right-click ➔ **Open with** ➔ Chrome / Edge / Safari).
+3. The site will open immediately in your browser!
+
+### Option 2: Using Python (Terminal / PowerShell)
+1. Open PowerShell or Command Prompt in your `Invitation` directory.
+2. Run this command:
+   ```bash
+   python -m http.server 8000
+   ```
+3. Open your browser and go to: `http://localhost:8000`
+4. Press `Ctrl + C` in the terminal when you are done to stop the server.
+
+### Option 3: VS Code "Live Server" Extension
+1. Install the **Live Server** extension in VS Code.
+2. Right-click `index.html` in your file tree and select **Open with Live Server**.
+
+---
+
 ## 🛠️ Step 1: Setting Up Google Sheets & Google Apps Script
 
 Follow these steps to create your free serverless database:
