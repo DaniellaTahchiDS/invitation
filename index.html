@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Celebration Invitation | Angela-Maria Farhat</title>
-    <meta name="description" content="You are cordially invited to celebrate with Angela-Maria Farhat. Please RSVP your attendance.">
-    
+    <meta name="description"
+        content="You are cordially invited to celebrate with Angela-Maria Farhat. Please RSVP your attendance.">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
     <!-- Custom Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <!-- Background Animated Petals -->
     <div class="petals-container" id="petalsContainer" aria-hidden="true"></div>
 
     <div class="main-wrapper">
         <main class="card-container">
-            
+
             <!-- VIEW 1: LANDING VIEW -->
             <section id="view-landing" class="view view-active">
                 <div class="card-header-image">
@@ -34,17 +39,23 @@
                         <span class="divider-icon">🌸</span>
                         <span class="divider-line"></span>
                     </div>
-                    <p class="welcome-text">Please enter your full name below to access your personalized invitation.</p>
+                    <p class="welcome-text">Please enter your full name below to access your personalized invitation.
+                    </p>
 
                     <form id="name-form" class="name-form" onsubmit="event.preventDefault(); handleNameSubmit();">
                         <div class="input-group">
-                            <input type="text" id="guest-name-input" class="form-input" placeholder="Enter Your Full Name" required autocomplete="off" aria-label="Enter Your Full Name">
+                            <input type="text" id="guest-name-input" class="form-input"
+                                placeholder="Enter Your Full Name" required autocomplete="off"
+                                aria-label="Enter Your Full Name">
                             <span class="input-focus-border"></span>
                         </div>
                         <p id="name-error" class="error-msg" hidden>Please enter your name to continue.</p>
                         <button type="submit" id="btn-next" class="btn btn-primary">
                             <span>View Invitation</span>
-                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
                         </button>
                     </form>
                 </div>
@@ -58,14 +69,15 @@
                 <div class="card-body text-center">
                     <p class="subtitle">A SPECIAL CELEBRATION FOR</p>
                     <h2 class="script-title">Angela-Maria Farhat</h2>
-                    
+
                     <div class="personalized-greeting">
                         <span class="greeting-pre">Dearest</span>
                         <h3 id="display-guest-name" class="guest-display-name">Guest Name</h3>
                     </div>
 
                     <div class="invitation-text-box">
-                        <p>We request the pleasure of your company to share in our joy, warmth, and special memories as we celebrate together.</p>
+                        <p>We request the pleasure of your company to share in our joy, warmth, and special memories as
+                            we celebrate together.</p>
                     </div>
 
                     <!-- Event Details Cards -->
@@ -73,28 +85,30 @@
                         <div class="detail-card">
                             <div class="detail-icon">🗓️</div>
                             <div class="detail-title">DATE</div>
-                            <div class="detail-val">Saturday, Oct 24, 2026</div>
+                            <div class="detail-val">Saturday, Sep 12, 2026</div>
                         </div>
                         <div class="detail-card">
                             <div class="detail-icon">⏰</div>
                             <div class="detail-title">TIME</div>
-                            <div class="detail-val">6:30 PM Onwards</div>
+                            <div class="detail-val">8:00 PM Onwards</div>
                         </div>
-                        <div class="detail-card">
+                        <a href="https://maps.app.goo.gl/vDAxCuTVHn1hJBo96" target="_blank" rel="noopener noreferrer" class="detail-card detail-card-link" title="Open location in Google Maps">
                             <div class="detail-icon">📍</div>
                             <div class="detail-title">VENUE</div>
-                            <div class="detail-val">The Grand Botanical Garden</div>
-                        </div>
+                            <div class="detail-val venue-link">Farhat's Villa, Delbta <span class="ext-icon">↗</span></div>
+                        </a>
                     </div>
 
                     <div class="rsvp-section">
-                        <h4 class="rsvp-heading">Kindly Respond by October 10th</h4>
+                        <h4 class="rsvp-heading">Kindly Respond by September 8th</h4>
                         <div class="rsvp-buttons">
-                            <button type="button" id="btn-attending" class="btn btn-accept" onclick="submitRSVP('Attending')">
+                            <button type="button" id="btn-attending" class="btn btn-accept"
+                                onclick="submitRSVP('Attending')">
                                 <span class="btn-check">✨</span>
                                 <span>Joyfully Accept</span>
                             </button>
-                            <button type="button" id="btn-declining" class="btn btn-decline" onclick="submitRSVP('Declining')">
+                            <button type="button" id="btn-declining" class="btn btn-decline"
+                                onclick="submitRSVP('Declining')">
                                 <span class="btn-check">🌸</span>
                                 <span>Regretfully Decline</span>
                             </button>
@@ -115,14 +129,13 @@
                 <div class="card-body text-center">
                     <div class="confirmation-badge" id="conf-badge">💐</div>
                     <h2 class="script-title" id="conf-title">Thank You!</h2>
-                    
+
                     <p class="personalized-thankyou" id="conf-message">
                         Your response has been saved. We look forward to celebrating with you!
                     </p>
 
                     <div class="confirmation-card-details" id="conf-event-info">
-                        <p class="conf-highlight">✨ We can't wait to see you!</p>
-                        <p class="conf-sub">Calendar details and updates will be sent closer to the date.</p>
+                        <p class="conf-highlight">✨ We can't wait to celebrate with you!</p>
                     </div>
 
                     <div class="action-footer">
@@ -134,7 +147,7 @@
             </section>
 
         </main>
-        
+
         <footer class="site-footer">
             <p>© 2026 Celebration for Angela-Maria Farhat • Crafted with Love</p>
         </footer>
@@ -143,4 +156,5 @@
     <!-- Script -->
     <script src="script.js"></script>
 </body>
+
 </html>
