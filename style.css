@@ -554,6 +554,154 @@ body {
     color: var(--color-primary-hover);
 }
 
+/* Countdown Timer Component */
+.countdown-container {
+    background: linear-gradient(135deg, rgba(253, 251, 248, 0.9) 0%, rgba(248, 239, 234, 0.6) 100%);
+    border: 1px solid rgba(200, 138, 110, 0.3);
+    border-radius: var(--radius-md);
+    padding: 16px 12px;
+    margin: 18px 0 22px;
+    text-align: center;
+}
+
+.countdown-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--color-gold);
+    margin-bottom: 10px;
+}
+
+.countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.countdown-box {
+    background: #FFFFFF;
+    border: 1px solid rgba(181, 101, 118, 0.25);
+    border-radius: var(--radius-sm);
+    padding: 8px 4px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
+}
+
+.countdown-box span {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1.1;
+}
+
+.countdown-box label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+}
+
+/* Secret Wish Components */
+.secret-trigger-wrapper {
+    margin: 20px 0 10px;
+}
+
+.btn-secret {
+    background: linear-gradient(135deg, #B56576 0%, #9C4D5D 100%);
+    color: #FFFFFF;
+    box-shadow: 0 6px 20px rgba(181, 101, 118, 0.3);
+}
+
+.btn-secret:hover {
+    background: linear-gradient(135deg, #9C4D5D 0%, #823A4A 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(181, 101, 118, 0.4);
+}
+
+.secret-badge-header {
+    margin-bottom: 15px;
+}
+
+.secret-tag {
+    display: inline-block;
+    background: #FFE8EC;
+    color: #B56576;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(181, 101, 118, 0.3);
+    margin-bottom: 6px;
+}
+
+.secret-notice-box {
+    background: rgba(255, 232, 236, 0.7);
+    border-left: 3.5px solid #B56576;
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.secret-alert {
+    color: #B56576;
+    font-size: 0.88rem;
+    margin-bottom: 4px;
+}
+
+.secret-desc {
+    font-size: 0.82rem;
+    color: var(--color-text-main);
+    line-height: 1.4;
+}
+
+.secret-form {
+    text-align: left;
+}
+
+.input-group-field {
+    margin-bottom: 16px;
+}
+
+.field-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    margin-bottom: 6px;
+}
+
+.form-textarea-subtle {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 0.92rem;
+    font-family: var(--font-sans);
+    color: var(--color-text-main);
+    background: #FFFFFF;
+    border: 1.5px solid rgba(200, 138, 110, 0.35);
+    border-radius: var(--radius-md);
+    outline: none;
+    resize: vertical;
+    transition: var(--transition-smooth);
+}
+
+.form-textarea-subtle:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(181, 101, 118, 0.15);
+}
+
+.wish-status-text {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-sage);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 480px) {
     .card-body {

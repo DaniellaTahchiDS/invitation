@@ -21,7 +21,60 @@ const state = {
 document.addEventListener('DOMContentLoaded', () => {
     initPetals();
     checkStoredGuest();
+    initCountdown();
 });
+
+/**
+ * Check if the entered guest name belongs to Angela
+ */
+function isAngelaName(name) {
+    if (!name) return false;
+    const normalized = name.trim().toLowerCase();
+    return normalized === 'angela' ||
+        normalized === 'angela farhat' ||
+        normalized === 'angela-maria' ||
+        normalized === 'angela maria' ||
+        normalized === 'angela-maria farhat' ||
+        normalized === 'angela maria farhat';
+}
+
+/**
+ * Live Countdown Timer to Party Date (Sep 12, 2026 8:00 PM)
+ */
+function initCountdown() {
+    const eventDate = new Date('2026-09-12T20:00:00').getTime();
+
+    function updateClock() {
+        const now = new Date().getTime();
+        const diff = eventDate - now;
+
+        if (diff <= 0) {
+            if (document.getElementById('cd-days')) document.getElementById('cd-days').textContent = '00';
+            if (document.getElementById('cd-hours')) document.getElementById('cd-hours').textContent = '00';
+            if (document.getElementById('cd-mins')) document.getElementById('cd-mins').textContent = '00';
+            if (document.getElementById('cd-secs')) document.getElementById('cd-secs').textContent = '00';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        const dElem = document.getElementById('cd-days');
+        const hElem = document.getElementById('cd-hours');
+        const mElem = document.getElementById('cd-mins');
+        const sElem = document.getElementById('cd-secs');
+
+        if (dElem) dElem.textContent = days < 10 ? '0' + days : days;
+        if (hElem) hElem.textContent = hours < 10 ? '0' + hours : hours;
+        if (mElem) mElem.textContent = minutes < 10 ? '0' + minutes : minutes;
+        if (sElem) sElem.textContent = seconds < 10 ? '0' + seconds : seconds;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+}
 
 /**
  * Handle Landing Page Name Submission
@@ -46,6 +99,16 @@ function handleNameSubmit() {
     // Update personalized display name
     document.getElementById('display-guest-name').textContent = name;
 
+    // Show or Hide Secret Wish Box based on whether the guest is Angela
+    const wishContainer = document.getElementById('secret-wish-container');
+    if (wishContainer) {
+        if (isAngelaName(name)) {
+            wishContainer.style.display = 'none';
+        } else {
+            wishContainer.style.display = 'block';
+        }
+    }
+
     // Transition to View 2 (Invitation)
     switchView('view-invitation');
 }
@@ -68,14 +131,19 @@ async function submitRSVP(status) {
     buttons.forEach(btn => btn.disabled = true);
     spinner.hidden = false;
 
-    // Payload to send to Google Apps Script
+    // Read optional secret wish note
+    const wishInput = document.getElementById('secret-wish-input');
+    const wishText = wishInput ? wishInput.value.trim() : '';
+
+    // Single Combined Payload to send to Google Apps Script
     const payload = {
         name: state.guestName,
         status: status,
+        wish: wishText,
         timestamp: new Date().toLocaleString()
     };
 
-    console.log("Submitting RSVP:", payload);
+    console.log("Submitting Combined RSVP Payload:", payload);
 
     try {
         // Only fire HTTP request if valid URL is provided
@@ -90,7 +158,6 @@ async function submitRSVP(status) {
             });
         } else {
             console.warn("Google Apps Script URL not configured yet. Simulation mode active.");
-            // Simulate brief network delay
             await new Promise(resolve => setTimeout(resolve, 800));
         }
     } catch (error) {
@@ -100,6 +167,11 @@ async function submitRSVP(status) {
         spinner.hidden = true;
         renderConfirmation(status);
         switchView('view-confirmation');
+
+        // Fire festive confetti on acceptance!
+        if (status === 'Attending') {
+            launchConfetti();
+        }
     }
 }
 
@@ -214,4 +286,75 @@ function escapeHtml(str) {
     return str.replace(/[&<>'"]/g,
         tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
     );
+}
+
+/**
+ * Lightweight Festive Confetti Burst Animation
+ */
+function launchConfetti() {
+    let canvas = document.getElementById('confetti-canvas');
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'confetti-canvas';
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '9999';
+        document.body.appendChild(canvas);
+    }
+
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#E5989B', '#B56576', '#2A5B5A', '#C88A6E', '#F4EAD3'];
+    const particles = [];
+
+    for (let i = 0; i < 80; i++) {
+        particles.push({
+            x: canvas.width / 2,
+            y: canvas.height / 2 + 50,
+            vx: (Math.random() - 0.5) * 14,
+            vy: (Math.random() - 0.75) * 16,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            size: Math.random() * 8 + 4,
+            rotation: Math.random() * 360,
+            rotationSpeed: (Math.random() - 0.5) * 10,
+            opacity: 1
+        });
+    }
+
+    function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let activeParticles = 0;
+
+        particles.forEach(p => {
+            if (p.opacity <= 0) return;
+            activeParticles++;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.32; // Gravity
+            p.rotation += p.rotationSpeed;
+            p.opacity -= 0.014;
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rotation * Math.PI) / 180);
+            ctx.globalAlpha = Math.max(0, p.opacity);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
+        });
+
+        if (activeParticles > 0) {
+            requestAnimationFrame(render);
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    }
+
+    render();
 }
