@@ -10,6 +10,7 @@
 
 const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxJBgSD9e5OiC1MukFvveKUVwVc3BTJpUgCkq3Vn1yTcPhonjMJxhcOW5VMo-Bc4cxGvA/exec';
 
+
 // Global Application State
 const state = {
     guestName: '',
