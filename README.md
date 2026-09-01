@@ -50,17 +50,27 @@ Follow these steps to create your free serverless database:
 
 ### 2. Open the Apps Script Editor
 1. In your Google Sheet menu bar, click **Extensions** ➔ **Apps Script**.
-2. Clear any existing code in `Code.gs` and paste the following JavaScript function:
+2. Clear any existing code in `Code.gs` and paste the following bulletproof JavaScript function:
 
 ```javascript
 function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var data = JSON.parse(e.postData.contents);
     
+    var data = {};
+    if (e && e.postData && e.postData.contents) {
+      try {
+        data = JSON.parse(e.postData.contents);
+      } catch (err) {
+        data = e.parameter || {};
+      }
+    } else if (e && e.parameter) {
+      data = e.parameter;
+    }
+
     var timestamp = data.timestamp || new Date().toLocaleString();
-    var name = data.name || "Unknown";
-    var status = data.status || "No Status";
+    var name = data.name || "Unknown Guest";
+    var status = data.status || "No Response";
 
     // Append row: [Timestamp, Guest Name, RSVP Status]
     sheet.appendRow([timestamp, name, status]);
@@ -74,16 +84,21 @@ function doPost(e) {
 }
 ```
 
-### 3. Deploy as a Web App
-1. Click the blue **Deploy** button at the top right ➔ Select **New deployment**.
+### 3. Deploy as a Web App (CRITICAL SETTINGS)
+1. Click the blue **Deploy** button at the top right ➔ Select **New deployment** (or **Manage deployments** if editing).
 2. Click the gear icon next to *Select type* ➔ Select **Web app**.
-3. Fill in the deployment details:
+3. Configure these exact settings:
    - **Description**: `RSVP Web App API`
-   - **Execute as**: `Me`
-   - **Who has access**: **`Anyone`** *(Crucial step! Allows anonymous site visitors to submit RSVPs)*.
+   - **Execute as**: `Me (your email)`
+   - **Who has access**: **`Anyone`** ⚠️ *(MUST be set to "Anyone", NOT "Only myself" or "Anyone with Google account", otherwise it blocks requests with a 403 Forbidden error!)*
 4. Click **Deploy**.
-5. Grant necessary Google permissions if prompted.
-6. **Copy the Web App URL** (it will look like: `https://script.google.com/macros/s/AKfycbx.../exec`).
+5. Click **Authorize access** and allow permissions if prompted.
+6. **Copy the Web App URL** (ends in `/exec`).
+
+> [!IMPORTANT]
+> **Updating Existing Deployments**:
+> Whenever you edit code in Google Apps Script, you MUST go to **Deploy** ➔ **Manage deployments** ➔ Click the **Pencil (Edit)** icon ➔ Change **Version** to **`New version`** ➔ Click **Deploy**. Updating code alone will NOT update the live web app!
+
 
 ---
 
